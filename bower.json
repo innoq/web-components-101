@@ -1,0 +1,15 @@
+{
+  "name": "web-components-101",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "platform": "Polymer/platform#~0.2.1",
+    "polymer": "Polymer/polymer#~0.2.1"
+  }
+}
