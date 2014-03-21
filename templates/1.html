@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../components/platform/platform.js"></script>
+  </head>
+  <body>
+    <template id="tweetTemplate">
+      <div>
+        <img src="">
+        <div class="author"></div>
+        <div class="text"></div>
+      </div>
+    </template>
+    <script>
+      function addTweet(imageUrl, author, text) {
+        var t = document.querySelector("#tweetTemplate");
+        var tweet = t.content.cloneNode(true);
+        // Populate content.
+        tweet.querySelector('img').src = imageUrl;
+        tweet.querySelector('.author').textContent = author;
+        tweet.querySelector('.text').textContent = text;
+        document.body.appendChild(tweet);
+      }
+    </script
+  </body>
+</html>
