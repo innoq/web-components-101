@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 1. Load platform.js for polyfill support.     -->
+    <script src="../components/platform/platform.js"></script>
+    
+    <link rel="import" href="../components/polymer-flex-layout/polymer-flex-layout.html">
+</head>
+<body>
+    <style>
+        button {
+            background-color: red;
+        }
+    </style>
+    <h1> This is a sample </h1>
+    
+    <element name="x-bar">
+        <template>
+            <p>Hey, this is a web component!</p>
+        </template>
+    </element>
+    
+    <div style="float:none; clear:both">
+        <div>
+            <polymer-flex-layout></polymer-flex-layout>
+            <div id="light">
+            </div>
+            <div flex> CENTER </div>
+            <div id="shadow">
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        <x-foo cn="bla"></x-foo>
+    </div>
+    
+    <div>
+        <x-bar cn="bla"></x-foo>
+    </div>
+    
+    
+    <script type="text/javascript" charset="utf-8">
+        var light = document.getElementById('light')
+        var shadowHost = document.getElementById('shadow')
+
+        var sr = shadowHost.createShadowRoot();
+        sr.innerHTML = '<style>'
+            + '  button:after { content: "- Shadow Style" } '
+            + '  :host { border: 1px dashed red; padding: 10px; font: 20pt "Arial" } '
+            + '</style>'
+            + '<content></content>'
+            + '<button id="snode">shadow</button>';
+        
+        light.innerHTML = '<button id="lnode">light</button>'
+        shadowHost.innerHTML = '<p>Here some text inside the shadow host.</p>'
+        
+        var snode = document.getElementById('snode')
+        console.log('Got Snode: ' + snode)
+        
+        var lnode = document.getElementById('lnode')
+        console.log('Got Lnode: ' + lnode)
+        
+        var XFooPrototype = Object.create(HTMLElement.prototype);
+        XFooPrototype.createdCallback = function() {
+          this.textContent = this.getAttribute('cn');
+        };
+        XFooPrototype.foo = function() {
+          console.log('foo() called');
+        };
+
+        var XFoo = document.registerElement('x-foo', {
+          prototype: XFooPrototype
+        });        
+    </script>
+    
+    <x-foo></x-foo>
+    
+</body>
+</html>
